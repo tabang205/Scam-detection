@@ -10,6 +10,7 @@ khép kín (End-to-End Pipeline) từ trích xuất dữ liệu, tiền xử lý
 Telegram Bot phục vụ người dùng theo thời gian thực.
 ---
 ## 📌 Tổng quan kiến trúc & Quy trình (Pipeline Workflow)
+```text
 [ Telegram Data / Chat Logs ]
 │
 ▼
@@ -26,9 +27,10 @@ Model Evaluation       ──► Đánh giá Loss, Accuracy, Precision-Recall Cu
 │
 ▼
 Deployment / Bot API   ──► Triển khai Real-time Inference Engine qua Telegram Bot (fraud_bot/)
+```
 ---
 ## 📂 Cấu trúc dự án (Repository Structure)
-
+```text
 ├── checkpoints_results/       # Checkpoints mô hình đã huấn luyện (.pt) & biểu đồ đánh giá (ROC-AUC, PR Curve, CM)
 ├── fraud_bot/                 # Ứng dụng Telegram Bot và bộ module dự đoán thời gian thực (Inference Engine)
 │   ├── bot.py                 # Luồng điều khiển Bot nhận/phản hồi tin nhắn
@@ -38,7 +40,7 @@ Deployment / Bot API   ──► Triển khai Real-time Inference Engine qua Tel
 ├── Telegram etl pipeline.ipynb# Quy trình trích xuất và tiền xử lý dữ liệu Telegram
 ├── scam_detection_training.ipynb # Kịch bản huấn luyện và tinh chỉnh (Fine-tuning) mô hình
 └── README.md
-
+```
 📊 Kết quả đánh giá mô hình (Model Performance)
 Mô hình được đánh giá toàn diện trên tập kiểm thử thông qua các chỉ số:
 Precision - Recall Curve: Đo lường khả năng bắt chính xác tin nhắn rác/lừa đảo mà không làm ảnh hưởng tin nhắn thường.
