@@ -1,0 +1,25 @@
+# Bỏ qua thư mục môi trường ảo (Chứa hàng chục ngàn file thư viện nặng nề)
+.venv/
+venv/
+env/
+
+# Bỏ qua các file cache tự động sinh ra của Python
+__pycache__/
+*.pyc
+*.pyo
+
+# CHẶN ĐỨNG DỮ LIỆU KHỦNG (Bảo vệ GitHub và ổ cứng)
+*.json
+*.csv
+*.parquet
+/data/
+/data_raw/
+
+# Cấu hình bảo mật (KHÔNG BAO GIỜ push API Key, Token Bot Telegram lên mạng)
+.env
+
+tele_bot_env/
+**/tele_bot_env/
+__pycache__/
+*.pyc
+.env
