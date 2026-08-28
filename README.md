@@ -57,10 +57,16 @@ Git LFS (để pull các file weights model nặng)
 Clone repository
 `git clone https://github.com/tabang205/Scam-detection`
 `cd Scam-detection`
+
+
 Tải weights model dung lượng lớn qua Git LFS
 `git lfs pull`
+
+
 Cài đặt dependencies
 `pip install -r requirements.txt`
+
+
 # 3. Cấu hình biến môi trường
 Tạo file .env tại thư mục gốc:
 `TELEGRAM_BOT_TOKEN="your_telegram_bot_token_here"`
