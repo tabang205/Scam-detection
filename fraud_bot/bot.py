@@ -18,7 +18,7 @@ from predictor import predict
 # ──────────────────────────────────────────────
 # CONFIG
 # ──────────────────────────────────────────────
-BOT_TOKEN = "8612418913:AAFqlsm9wBg-lCermTme2DET1jFtghSuGkI"   # @BotFather 
+BOT_TOKEN = "your telegram token"   # @BotFather 
 
 # ──────────────────────────────────────────────
 # Logging
