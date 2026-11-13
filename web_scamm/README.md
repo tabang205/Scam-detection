@@ -2,6 +2,12 @@
 
 Dự án gồm hai phần chính: **Backend (FastAPI)** vận hành mô hình AI **XLM-RoBERTa** (`model/xlmr_scam_shield/`) và **Frontend (React + Vite)** hiển thị giao diện phân tích, thống kê và nhật ký quét theo từng tài khoản (JWT).
 
+<p align="center">
+  <img src="assets/demo.webp" alt="AI Scam Shield Full-Stack Demo" width="90%" />
+</p>
+
+> *Fallback GIF*: [assets/demo.gif](assets/demo.gif)
+
 ---
 
 ## 1. Khởi chạy Backend (FastAPI)
