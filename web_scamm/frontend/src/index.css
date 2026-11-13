@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+@import "tailwindcss";
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   AI SCAM SHIELD — Design System
+   Theme: "Synthetic Sentinel"
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Custom Theme Configuration ─────────────────────────────────── */
+@theme {
+  /* ── Colors (Material You Dark) ── */
+  --color-primary: #e1fdff;
+  --color-on-primary: #00363a;
+  --color-primary-container: #00f2ff;
+  --color-on-primary-container: #006a71;
+  --color-primary-fixed: #74f5ff;
+  --color-primary-fixed-dim: #00dbe7;
+  --color-on-primary-fixed: #002022;
+  --color-on-primary-fixed-variant: #004f54;
+  --color-inverse-primary: #00696f;
+
+  --color-secondary: #ffb3b2;
+  --color-on-secondary: #680012;
+  --color-secondary-container: #ff525c;
+  --color-on-secondary-container: #5b000f;
+  --color-secondary-fixed: #ffdad8;
+  --color-secondary-fixed-dim: #ffb3b2;
+  --color-on-secondary-fixed: #410008;
+  --color-on-secondary-fixed-variant: #92001e;
+
+  --color-tertiary: #fcf5ff;
+  --color-on-tertiary: #3c0090;
+  --color-tertiary-container: #e3d4ff;
+  --color-on-tertiary-container: #7318ff;
+  --color-tertiary-fixed: #e9ddff;
+  --color-tertiary-fixed-dim: #d1bcff;
+  --color-on-tertiary-fixed: #23005b;
+  --color-on-tertiary-fixed-variant: #5700c9;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  --color-surface: #111318;
+  --color-surface-dim: #111318;
+  --color-surface-bright: #37393e;
+  --color-surface-container-lowest: #0c0e12;
+  --color-surface-container-low: #1a1c20;
+  --color-surface-container: #1e2024;
+  --color-surface-container-high: #282a2e;
+  --color-surface-container-highest: #333539;
+  --color-surface-variant: #333539;
+  --color-surface-tint: #00dbe7;
+  --color-on-surface: #e2e2e8;
+  --color-on-surface-variant: #b9cacb;
+  --color-inverse-surface: #e2e2e8;
+  --color-inverse-on-surface: #2f3035;
+
+  --color-outline: #849495;
+  --color-outline-variant: #3a494b;
+  --color-background: #111318;
+  --color-on-background: #e2e2e8;
+
+  /* ── Typography ── */
+  --font-family-display: "Geist", system-ui, sans-serif;
+  --font-family-headline: "Geist", system-ui, sans-serif;
+  --font-family-body: "Inter", system-ui, sans-serif;
+  --font-family-code: "JetBrains Mono", monospace;
+
+  /* ── Spacing ── */
+  --spacing-gutter: 24px;
+  --spacing-margin-desktop: 40px;
+  --spacing-margin-mobile: 16px;
+
+  /* ── Border Radius ── */
+  --radius-sm: 0.125rem;
+  --radius-DEFAULT: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════════
+   Global Base Styles
+   ═══════════════════════════════════════════════════════════════════ */
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #0c0e12;
+  color: #e2e2e8;
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Glass Panel — Primary surface element
+   ═══════════════════════════════════════════════════════════════════ */
+
+.glass-panel {
+  background: rgba(30, 32, 36, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.glass-panel:hover {
+  border-color: rgba(0, 219, 231, 0.2);
+  box-shadow: 0 0 15px rgba(0, 219, 231, 0.05);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Neon Glow Effects
+   ═══════════════════════════════════════════════════════════════════ */
+
+.neon-glow-primary {
+  box-shadow: 0 0 15px rgba(0, 219, 231, 0.3);
+}
+
+.neon-glow-error {
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+}
+
+.neon-glow-secondary {
+  box-shadow: 0 0 15px rgba(255, 82, 92, 0.15);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Animations
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Pulsing dot (scanner active indicator) */
+.pulsing-dot {
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 219, 231, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 219, 231, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 219, 231, 0);
+  }
+}
+
+/* Threat pulse (red) */
+.threat-pulse {
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 82, 92, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 82, 92, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 82, 92, 0);
+  }
+}
+
+/* Scan line animation (detect page) */
+.scan-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00dbe7, transparent);
+  position: absolute;
+  top: 0;
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: 0%; opacity: 0; }
+  50% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Noise Background Texture
+   ═══════════════════════════════════════════════════════════════════ */
+
+.noise-bg {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Typography Utilities
+   ═══════════════════════════════════════════════════════════════════ */
+
+.font-display-lg {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.font-headline-lg {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.font-headline-lg-mobile {
+  font-family: "Geist", system-ui, sans-serif;
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.font-body-md {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.font-body-sm {
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.font-code-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Material Symbols Configuration
+   ═══════════════════════════════════════════════════════════════════ */
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Scrollbar Styling
+   ═══════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a494b;
+  border-radius: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Focus / Neon Input Glow
+   ═══════════════════════════════════════════════════════════════════ */
+
+.neon-glow-focus:focus-within {
+  box-shadow: 0 0 15px rgba(0, 219, 231, 0.4);
+  border-color: #00dbe7;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Threat / Safe Border Accents
+   ═══════════════════════════════════════════════════════════════════ */
+
+.threat-accent {
+  border-left: 4px solid #ff525c;
+}
+
+.safe-accent {
+  border-left: 4px solid #00dbe7;
+}

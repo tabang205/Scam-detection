@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: scamshield-backend
+    environment:
+      - DATABASE_URL=sqlite:////app/backend/data/scamshield.db
+      - SECRET_KEY=${SECRET_KEY:-scam-shield-dev-secret-key-change-in-prod}
+      - HF_MODEL_REPO=${HF_MODEL_REPO:-bangta/Scam-detection}
+      - HF_TOKEN=${HF_TOKEN:-}
+    volumes:
+      - db-data:/app/backend/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: scamshield-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  db-data:

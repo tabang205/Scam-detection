@@ -7,19 +7,28 @@ env/
 __pycache__/
 *.pyc
 *.pyo
+.pytest_cache/
 
 # CHẶN ĐỨNG DỮ LIỆU KHỦNG (Bảo vệ GitHub và ổ cứng)
 *.json
+!web_scamm/**/*.json
 *.csv
 *.parquet
+*.zip
+*.tar.gz
+*.safetensors
+*.pt
+*.bin
+*.pth
+*.db
+*.sqlite3
 /data/
 /data_raw/
 
 # Cấu hình bảo mật (KHÔNG BAO GIỜ push API Key, Token Bot Telegram lên mạng)
 .env
+.env.local
+.env.*.local
 
 tele_bot_env/
 **/tele_bot_env/
-__pycache__/
-*.pyc
-.env

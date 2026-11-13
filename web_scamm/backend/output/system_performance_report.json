@@ -1,0 +1,76 @@
+{
+  "model_name": "xlm-roberta-base",
+  "threshold": 0.69,
+  "max_length": 128,
+  "dataset_stats": {
+    "raw_total": 34245696,
+    "raw_scam": 87010,
+    "raw_clean": 34005062,
+    "dropped_null_or_empty": 1,
+    "dropped_boilerplate": 153624,
+    "dropped_dup_scam": 31985,
+    "kept_unique_scam": 55024,
+    "kept_clean_sampled": 95737,
+    "kept_vi_clean": 20000
+  },
+  "metrics": {
+    "accuracy": 97.61,
+    "precision": 97.08,
+    "recall": 96.24,
+    "f1_score": 96.66,
+    "roc_auc": 99.65,
+    "pr_auc": 99.47
+  },
+  "vi_bench_metrics": {
+    "name": "XLM-RoBERTa (VI Bench)",
+    "accuracy": 0.9875,
+    "precision": 0.9899,
+    "recall": 0.985,
+    "f1": 0.9875,
+    "roc_auc": 0.9992,
+    "pr_auc": 0.9993
+  },
+  "vi_sms_metrics": {
+    "name": "XLM-RoBERTa (VI SMS Test)",
+    "accuracy": 0.9246,
+    "precision": 0.8383,
+    "recall": 0.8861,
+    "f1": 0.8615,
+    "roc_auc": 0.9657,
+    "pr_auc": 0.923
+  },
+  "baseline_metrics": {
+    "name": "TF-IDF + LogReg (Combined Test)",
+    "accuracy": 0.9603,
+    "precision": 0.9517,
+    "recall": 0.9371,
+    "f1": 0.9443,
+    "roc_auc": 0.9918,
+    "pr_auc": 0.9872
+  },
+  "benchmark_100": {
+    "correct": 98,
+    "total": 100,
+    "f1": 0.9804,
+    "errors": [
+      {
+        "idx": 58,
+        "actual": 0,
+        "pred": 1,
+        "scam_prob": 0.9853,
+        "text": "Quý khách lưu ý: Ngân hàng không bao giờ yêu cầu cung cấp mã OTP hoặc mật khẩu qua điện thoại hay đường link lạ."
+      },
+      {
+        "idx": 67,
+        "actual": 0,
+        "pred": 1,
+        "scam_prob": 0.868,
+        "text": "Bạn bấm vào nút tải xuống trên trang chủ chính thức của trường để lấy thời khóa biểu nhé."
+      }
+    ]
+  },
+  "system": {
+    "latency_per_sample_ms": 2.07,
+    "model_size_mb": 530.35
+  }
+}

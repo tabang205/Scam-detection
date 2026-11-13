@@ -1,0 +1,42 @@
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python cache / compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Large model weights (too big for GitHub standard repositories)
+model/merged_model.pt
+model/best_model.pt
+model/xlmr_scam_shield/
+*.pt
+*.bin
+*.pth
+*.safetensors
+
+# Local Database
+backend/scamshield.db
+*.db
+*.sqlite3
+
+# Node modules & build files
+node_modules/
+frontend/node_modules/
+frontend/dist/
+dist/
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+
+# IDEs & System files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
