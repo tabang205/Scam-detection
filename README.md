@@ -6,6 +6,12 @@ Hệ thống phát hiện tin nhắn và liên kết lừa đảo đa ngôn ng�
 * **Model Weights (Hugging Face Hub)**: Trọng số `XLM-RoBERTa v2` được lưu trữ tại [`bangta/Scam-detection`](https://huggingface.co/bangta/Scam-detection) (tự động tải khi chạy ứng dụng, không cần Git LFS).
 * **Telegram Bot (`fraud_bot/`)**: Module bot Telegram tham khảo (phiên bản PhoBERT v1; các checkpoint PhoBERT cũ được lưu tại nhánh `archive-v1-phobert`).
 
+<p align="center">
+  <img src="./web_scamm/assets/demo.webp" alt="AI Scam Shield Full-Stack Demo" width="90%" />
+</p>
+
+> *Fallback GIF*: [`web_scamm/assets/demo.gif`](./web_scamm/assets/demo.gif)
+
 ---
 
 ## 📊 Hiệu năng Mô hình XLM-RoBERTa (v2)
