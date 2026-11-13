@@ -1,74 +1,80 @@
-# 🛡️ Telegram Scam Detection System (End-to-End Deep Learning Pipeline)
+# 🛡️ AI Scam Shield — Multilingual Scam & Phishing Detection
 
-![Python](https://www.python.org/)
-![PyTorch](https://pytorch.org/)
-![Telegram Bot API](https://core.telegram.org/bots)
-![Git LFS](https://git-lfs.github.com/)
+Hệ thống phát hiện tin nhắn và liên kết lừa đảo đa ngôn ngữ (**Tiếng Việt & Tiếng Anh**) sử dụng **XLM-RoBERTa (`xlm-roberta-base`)**, bao gồm:
+* **Web Application (`web_scamm/`)**: Backend **FastAPI + SQLAlchemy (JWT Auth)** và Frontend **React + Vite + TailwindCSS**.
+* **Training & ETL Pipeline (`notebooks/`)**: Notebook xử lý ~34.25M dòng `Data_Preprocessing.zip` kết hợp các bộ dữ liệu SMS/Email/VI Fraud và huấn luyện mô hình v2.
+* **Model Weights (Hugging Face Hub)**: Trọng số `XLM-RoBERTa v2` được lưu trữ tại [`bangta/Scam-detection`](https://huggingface.co/bangta/Scam-detection) (tự động tải khi chạy ứng dụng, không cần Git LFS).
+* **Telegram Bot (`fraud_bot/`)**: Module bot Telegram tham khảo (phiên bản PhoBERT v1; các checkpoint PhoBERT cũ được lưu tại nhánh `archive-v1-phobert`).
 
-Hệ thống phát hiện tin nhắn và hành vi lừa đảo trực tuyến trên nền tảng Telegram, được xây dựng theo quy trình Machine Learning/Deep Learning 
-khép kín (End-to-End Pipeline) từ trích xuất dữ liệu, tiền xử lý, huấn luyện mô hình phân loại văn bản đến đóng gói và triển khai ứng dụng 
-Telegram Bot phục vụ người dùng theo thời gian thực.
 ---
-## 📌 Tổng quan kiến trúc & Quy trình (Pipeline Workflow)
-```text
-[ Telegram Data / Chat Logs ]
-│
-▼
-ETL & Data Processing  ──► Trích xuất dữ liệu (Telegram etl pipeline.ipynb) & lọc trùng lặp (loctrunglap.ipynb)
-│
-▼
-Custom Tokenization    ──► Tokenizer xử lý văn bản tiếng Việt (Byte-Pair Encoding / BPE)
-│
-▼
-Deep Learning Training ──► Fine-tuning mô hình ngôn ngữ (scam_detection_training.ipynb)
-│
-▼
-Model Evaluation       ──► Đánh giá Loss, Accuracy, Precision-Recall Curve, ROC-AUC, Confusion Matrix
-│
-▼
-Deployment / Bot API   ──► Triển khai Real-time Inference Engine qua Telegram Bot (fraud_bot/)
-```
+
+## 📊 Hiệu năng Mô hình XLM-RoBERTa (v2)
+
+Đánh giá từ [`reports/v2/system_performance_report.json`](./reports/v2/system_performance_report.json) với ngưỡng hiệu chỉnh `threshold = 0.69`, `max_length = 128`:
+
+| Bộ đánh giá | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| **Combined Test (12,878 mẫu)** | **97.61%** | **97.08%** | **96.24%** | **96.66%** | **99.65%** |
+| TF-IDF + LogReg Baseline (Combined Test) | 96.03% | 95.17% | 93.71% | 94.43% | 99.18% |
+| **VI Fraud Bench (400 mẫu tiếng Việt)** | **98.75%** | **98.99%** | **98.50%** | **98.75%** | **99.92%** |
+| **VI SMS Test (597 mẫu)** | **92.46%** | **83.83%** | **88.61%** | **86.15%** | **96.57%** |
+| **100-Sample Realistic Benchmark** | **98.00% (`98/100`)** | — | — | **98.04%** | — |
+
+<p align="center">
+  <img src="./reports/v2/training_curves.png" width="48%" alt="Training Curves" />
+  <img src="./reports/v2/confusion_matrix.png" width="48%" alt="Confusion Matrix" />
+</p>
+
 ---
-## 📂 Cấu trúc dự án (Repository Structure)
+
+## 📂 Cấu trúc Repository
+
 ```text
-├── checkpoints_results/       # Checkpoints mô hình đã huấn luyện (.pt) & biểu đồ đánh giá (ROC-AUC, PR Curve, CM)
-├── fraud_bot/                 # Ứng dụng Telegram Bot và bộ module dự đoán thời gian thực (Inference Engine)
-│   ├── bot.py                 # Luồng điều khiển Bot nhận/phản hồi tin nhắn
-│   └── predictor.py           # Tiền xử lý input và load mô hình dự đoán nhãn lừa đảo
-├── tokenizer/                 # Bộ từ điển và tokenizer (vocab.txt, bpe.codes)
-├── tokenized/                 # Tập dữ liệu sau khi tokenize dạng Arrow/Parquet
-├── Telegram etl pipeline.ipynb# Quy trình trích xuất và tiền xử lý dữ liệu Telegram
-├── scam_detection_training.ipynb # Kịch bản huấn luyện và tinh chỉnh (Fine-tuning) mô hình
-└── README.md
+├── web_scamm/                         # Ứng dụng Web AI Scam Shield (Full-stack)
+│   ├── backend/                       # FastAPI, SQLite/SQLAlchemy, JWT Auth, XLM-RoBERTa Inference
+│   ├── frontend/                      # React + Vite Dashboard, Detect, Analytics, History, Settings
+│   ├── scripts/                       # download_model.py & upload_to_hf.py (Hugging Face Hub)
+│   ├── docker-compose.yml             # Triển khai Docker Backend + Frontend
+│   └── README.md                      # Hướng dẫn cài đặt chi tiết cho Web App
+├── notebooks/                         # Notebook ETL & Fine-tuning
+│   ├── telegram_etl_pipeline.ipynb    # ETL dữ liệu Telegram
+│   ├── scam_detection_training_v1.ipynb # Thử nghiệm PhoBERT v1
+│   └── train_scam_shield_v2.ipynb     # Pipeline huấn luyện XLM-RoBERTa v2 (Kaggle)
+├── reports/v2/                        # Báo cáo JSON & biểu đồ đánh giá mô hình v2
+├── checkpoints_results/               # Biểu đồ tham khảo từ giai đoạn v1
+└── fraud_bot/                         # Telegram Bot phát hiện lừa đảo
 ```
-📊 Kết quả đánh giá mô hình (Model Performance)
-Mô hình được đánh giá toàn diện trên tập kiểm thử thông qua các chỉ số:
-Precision - Recall Curve: Đo lường khả năng bắt chính xác tin nhắn rác/lừa đảo mà không làm ảnh hưởng tin nhắn thường.
-ROC-AUC: Đo lường phân tách giữa lớp nhãn Scam và Normal.
-Confusion Matrix & Training Metrics: Chi tiết tại thư mục checkpoints_results/.
 
-🚀 Hướng dẫn cài đặt & Chạy ứng dụng
-# 1. Yêu cầu môi trường
-Python 3.12+
+---
 
+## 🚀 Hướng dẫn Khởi chạy Nhanh (Web App `web_scamm/`)
 
-Git LFS (để pull các file weights model nặng)
-# 2. Cài đặt thư viện
-Clone repository
-`git clone https://github.com/tabang205/Scam-detection`
-`cd Scam-detection`
+```powershell
+git clone https://github.com/tabang205/Scam-detection.git
+cd Scam-detection\web_scamm
+```
 
+### 1. Chạy Backend (FastAPI — Python 3.11 / 3.12)
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+pip install -r backend\requirements.txt
+copy .env.example .env
 
-Tải weights model dung lượng lớn qua Git LFS
-`git lfs pull`
+# Tùy chọn: tải trước trọng số từ Hugging Face (hoặc backend tự tải khi gọi /api/detect lần đầu)
+python scripts\download_model.py
 
+cd backend
+python -m uvicorn app:app --reload --host 127.0.0.1 --port 8000
+```
 
-Cài đặt dependencies
-`pip install -r requirements.txt`
+### 2. Chạy Frontend (React + Vite)
+```powershell
+cd web_scamm\frontend
+npm install
+npm run dev
+```
 
-
-# 3. Cấu hình biến môi trường
-Tạo file .env tại thư mục gốc:
-`TELEGRAM_BOT_TOKEN="your_telegram_bot_token_here"`
-# 4. Khởi chạy Bot
-`python fraud_bot/bot.py`
+* **Frontend**: `http://localhost:5173`
+* **API Docs (Swagger)**: `http://localhost:8000/docs`
+* **Docker Compose**: xem thêm tại [`web_scamm/README.md`](./web_scamm/README.md).

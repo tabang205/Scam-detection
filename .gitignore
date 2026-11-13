@@ -1,19 +1,25 @@
-# Bỏ qua thư mục môi trường ảo (Chứa hàng chục ngàn file thư viện nặng nề)
+# Python virtual environments
 .venv/
 venv/
 env/
+tele_bot_env/
+**/tele_bot_env/
 
-# Bỏ qua các file cache tự động sinh ra của Python
+# Python caches
 __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
 
-# CHẶN ĐỨNG DỮ LIỆU KHỦNG (Bảo vệ GitHub và ổ cứng)
-*.json
-!web_scamm/**/*.json
+# Raw datasets, checkpoints, and large artifacts
+TGDataset/
+tokenized/
+tokenizer/
+/data/
+/data_raw/
 *.csv
 *.parquet
+*.arrow
 *.zip
 *.tar.gz
 *.safetensors
@@ -22,13 +28,12 @@ __pycache__/
 *.pth
 *.db
 *.sqlite3
-/data/
-/data_raw/
+*.docx
+*.json
+!web_scamm/**/*.json
+!reports/**/*.json
 
-# Cấu hình bảo mật (KHÔNG BAO GIỜ push API Key, Token Bot Telegram lên mạng)
+# Secrets & local env
 .env
 .env.local
 .env.*.local
-
-tele_bot_env/
-**/tele_bot_env/

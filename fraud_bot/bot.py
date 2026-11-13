@@ -5,6 +5,7 @@ Dùng python-telegram-bot v20+ (async).
 """
 
 import logging
+import os
 from telegram import Update
 from telegram.ext import (
     ApplicationBuilder,
@@ -18,7 +19,7 @@ from predictor import predict
 # ──────────────────────────────────────────────
 # CONFIG
 # ──────────────────────────────────────────────
-BOT_TOKEN = "your telegram token"   # @BotFather 
+BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
 
 # ──────────────────────────────────────────────
 # Logging
@@ -133,6 +134,8 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Main
 # ──────────────────────────────────────────────
 def main():
+    if not BOT_TOKEN:
+        raise RuntimeError("Missing TELEGRAM_BOT_TOKEN environment variable.")
     logger.info("Khởi động Fraud Shield Bot...")
     app = ApplicationBuilder().token(BOT_TOKEN).build()
 
